@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { Card, Grid2 as Grid, Typography } from '@mui/material';
+import { Card, FormControl, Grid2 as Grid, InputLabel, MenuItem, Select, Typography } from '@mui/material';
 import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
 import DirectionsBusIcon from '@mui/icons-material/DirectionsBus';
 import TwoWheelerIcon from '@mui/icons-material/TwoWheeler';
@@ -29,60 +29,74 @@ const chartSetting = {
 // classes_to_count = [2 car, 3 motorcycle, 5 bus, 7 truck]
 
 const DashboardCCTV = () => {
-    const [data, setData] = useState(null);
+    const [datacctv, setData] = useState(null);
     const [jumlahMotor, setJumlahMotor] = useState(0);
     const [jumlahMobil, setJumlahMobil] = useState(0);
     const [jumlahBus, setJumlahBus] = useState(0);
     const [jumlahTruk, setJumlahTruk] = useState(0);
     const [jalurKanan, setJalurKanan] = useState('Lancar');
     const [jalurKiri, setJalurKiri] = useState('Lancar');
+    const [titik_cctv, setTitikCCTV] = useState('pettarani');
 
+    
     const getdata = useCallback(async () => {
-        await fetch(process.env.REACT_APP_API_URL + "image-data", {
+        await fetch(process.env.REACT_APP_API_URL + "image-data/" + titik_cctv, {
             method: 'get',
         })
             .then(res => res.json())
             .then((data) => {
                 setData(data);
 
-                if(data['counts_left'].length() <= 4){
+                console.log(data.counts_left.length)
+
+                if (data.counts_left.length <= 4) {
                     setJalurKiri('Lancar');
-                }else if(data['counts_left'].length() > 4 && data['counts_left'].length() <= 7){
+                }
+                if (data.counts_left.length > 4 && data.counts_left.length() <= 7) {
                     setJalurKiri('Ramai Lancar');
-                }else if(data['counts_left'].length() > 7){
+                }
+                if (data.counts_left.length > 7) {
                     setJalurKiri('Macet');
                 }
 
-                if(data['counts_right'].length() <= 4){
+                if (data.counts_right.length <= 4) {
                     setJalurKanan('Lancar');
-                }else if(data['counts_right'].length() > 4 && data['counts_right'].length() <= 7){
+                }
+                if (data.counts_right.length > 4 && data.counts_right.length() <= 7) {
                     setJalurKanan('Ramai Lancar');
-                }else if(data['counts_right'].length() > 7){
+                }
+                if (data.counts_right.length > 7) {
                     setJalurKanan('Macet');
                 }
 
                 // setJalurKanan(length(data['counts_right']))
-                data['counts_left'].forEach(element => {
-                    switch (element){
-                        case 2: setJumlahMobil(jumlahMobil+1); break;
-                        case 3: setJumlahMotor(jumlahMotor+1); break;
-                        case 5: setJumlahBus(jumlahBus+1); break;
-                        case 7: setJumlahTruk(jumlahTruk+1); break;
+                data.counts_left.forEach(element => {
+                    switch (element) {
+                        case 2: setJumlahMobil(jumlahMobil => jumlahMobil + 1); break;
+                        case 3: setJumlahMotor(jumlahMotor => jumlahMotor + 1); break;
+                        case 5: setJumlahBus(jumlahBus => jumlahBus + 1); break;
+                        case 7: setJumlahTruk(jumlahTruk => jumlahTruk + 1); break;
                         default: break;
                     }
                 });
-                data['counts_right'].forEach(element => {
-                    switch (element){
-                        case 2: setJumlahMobil(jumlahMobil+1); break;
-                        case 3: setJumlahMotor(jumlahMotor+1); break;
-                        case 5: setJumlahBus(jumlahBus+1); break;
-                        case 7: setJumlahTruk(jumlahTruk+1); break;
+                data.counts_right.forEach(element => {
+                    switch (element) {
+                        case 2: setJumlahMobil(jumlahMobil => jumlahMobil + 1); break;
+                        case 3: setJumlahMotor(jumlahMotor => jumlahMotor + 1); break;
+                        case 5: setJumlahBus(jumlahBus => jumlahBus + 1); break;
+                        case 7: setJumlahTruk(jumlahTruk => jumlahTruk + 1); break;
                         default: break;
                     }
                 });
             })
             .catch(err => console.log(err));
-    }, []);
+    }, [setData, setJalurKanan, setJalurKiri, setJumlahBus, setJumlahMobil, setJumlahMotor, setJumlahTruk, titik_cctv]);
+
+    const handleChange = useCallback((e) => {
+        getdata()
+        setTitikCCTV(e.target.value)
+    }, [getdata, setTitikCCTV]);
+
 
     useEffect(() => {
         // Fetch data immediately when the component mounts
@@ -159,14 +173,36 @@ const DashboardCCTV = () => {
                 </Card>
             </Grid>
             <Grid container size={6} direction={'column'} spacing={2}>
-                <Grid container justifyContent={'center'}>
+                <Grid>
+                    <FormControl fullWidth
+                    sx={{
+                        marginTop: 2,
+                        marginX: 1
+                    }}>
+                        <InputLabel id="demo-simple-select-label">Titik CCTV</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            value={titik_cctv}
+                            label="Age"
+                            onChange={handleChange}
+                        >
+                            <MenuItem value={'pettarani'}>Pettarani</MenuItem>
+                            <MenuItem value={'barombong'}>Barombong</MenuItem>
+                            <MenuItem value={'alauddin'}>Alauddin</MenuItem>
+                            <MenuItem value={'mtos'}>Veteran Sungai Saddang</MenuItem>
+                        </Select>
+                    </FormControl>
+                </Grid>
+                <Grid container justifyContent={'center'} justifySelf={'center'}>
                     <Card sx={{
                         marginTop: 2,
                         marginX: 1,
                         width: '100%',
-                        justifyItems: 'center'
+                        justifyItems: 'center',
+                        justifyContent: 'center'
                     }}>
-                        { data ? <img src={'data:image/jpeg;base64,' + data.image} /> : '' }
+                        {datacctv ? <img height={400} width={800} alt='cctv' src={'data:image/jpeg;base64,' + datacctv.image} /> : ''}
                     </Card>
                 </Grid>
                 <Grid container justifyContent={'center'}>
