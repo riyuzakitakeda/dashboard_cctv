@@ -52,7 +52,7 @@ const DashboardCCTV = () => {
                     setJalurKiri('Lancar');
                 }
                 if (parseInt(data.count_region_left) > 4 && parseInt(data.count_region_left) <= 10) {
-                    setJalurKiri('Ramai Lancar');
+                    setJalurKiri('Padat');
                 }
                 if (parseInt(data.count_region_left) > 10) {
                     setJalurKiri('Macet');
@@ -62,7 +62,7 @@ const DashboardCCTV = () => {
                     setJalurKanan('Lancar');
                 }
                 if (parseInt(data.count_region_right) > 4 && parseInt(data.count_region_right) <= 10) {
-                    setJalurKanan('Ramai Lancar');
+                    setJalurKanan('Padat');
                 }
                 if (parseInt(data.count_region_right) > 10) {
                     setJalurKanan('Macet');

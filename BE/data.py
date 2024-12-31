@@ -19,7 +19,7 @@ CAMERA_CONFIGS = {
         "username": "admin",
         "password": "makassar12",
         "ip": "10.50.12.200",
-        "line_points_left": [(150, 250), (400, 250), (700, 500), (150, 500)],
+        "line_points_left": [(150, 175), (300, 175), (700, 500), (150, 500)],
         "line_points_right": [(300, 150), (500, 140), (700, 200), (600, 300)],
         "classes_to_count": [2, 3, 5, 7], 
     },
@@ -35,8 +35,8 @@ CAMERA_CONFIGS = {
         "username": "admin",
         "password": "makassar12",
         "ip": "10.50.77.200",
-        "line_points_left": [(470, 230), (570, 270), (230, 550), (25, 300)],
-        "line_points_right": [(580, 270), (700, 300), (670, 550), (270, 550)],
+        "line_points_left": [(550, 220), (620, 250), (230, 550), (25, 300)],
+        "line_points_right": [(600, 270), (700, 300), (670, 550), (250, 550)],
         "classes_to_count": [2, 3, 5, 7],
     },
     "mtos": {
@@ -147,14 +147,14 @@ async def process_frame(counter, full_uri):
         if int(count_region_left) <= 4 :
             status_kiri = "lancar"
         elif int(count_region_left) > 4 and int(count_region_left) <=10:
-            status_kiri = "ramai lancar"
+            status_kiri = "padat"
         elif int(count_region_left) > 10:
             status_kiri = "macet"
         
         if int(count_region_right) <= 4 :
             status_kanan = "lancar"
         elif int(count_region_right) > 4 and int(count_region_right) <=10:
-            status_kanan = "ramai lancar"
+            status_kanan = "padat"
         elif int(count_region_right) > 10:
             status_kanan = "macet"
 
