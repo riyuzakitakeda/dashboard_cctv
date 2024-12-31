@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { Card, FormControl, Grid2 as Grid, InputLabel, MenuItem, Select, Typography } from '@mui/material';
+import { Card, CircularProgress, FormControl, Grid2 as Grid, InputLabel, MenuItem, Select, Typography } from '@mui/material';
 import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
 import DirectionsBusIcon from '@mui/icons-material/DirectionsBus';
 import TwoWheelerIcon from '@mui/icons-material/TwoWheeler';
@@ -34,9 +34,10 @@ const DashboardCCTV = () => {
     const [jumlahMobil, setJumlahMobil] = useState(0);
     const [jumlahBus, setJumlahBus] = useState(0);
     const [jumlahTruk, setJumlahTruk] = useState(0);
-    const [jalurKanan, setJalurKanan] = useState('Lancar');
-    const [jalurKiri, setJalurKiri] = useState('Lancar');
+    const [jalurKanan, setJalurKanan] = useState('');
+    const [jalurKiri, setJalurKiri] = useState('');
     const [titik_cctv, setTitikCCTV] = useState('pettarani');
+    const [loading, setLoading] = useState(true);
 
     
     const getdata = useCallback(async () => {
@@ -47,31 +48,30 @@ const DashboardCCTV = () => {
             .then((data) => {
                 setData(data);
 
-                console.log(data.counts_left.length)
-
-                if (data.counts_left.length <= 4) {
+                if (parseInt(data.count_region_left) <= 4) {
                     setJalurKiri('Lancar');
                 }
-                if (data.counts_left.length > 4 && data.counts_left.length() <= 7) {
+                if (parseInt(data.count_region_left) > 4 && parseInt(data.count_region_left) <= 10) {
                     setJalurKiri('Ramai Lancar');
                 }
-                if (data.counts_left.length > 7) {
+                if (parseInt(data.count_region_left) > 10) {
                     setJalurKiri('Macet');
                 }
 
-                if (data.counts_right.length <= 4) {
+                if (parseInt(data.count_region_right) <= 4) {
                     setJalurKanan('Lancar');
                 }
-                if (data.counts_right.length > 4 && data.counts_right.length() <= 7) {
+                if (parseInt(data.count_region_right) > 4 && parseInt(data.count_region_right) <= 10) {
                     setJalurKanan('Ramai Lancar');
                 }
-                if (data.counts_right.length > 7) {
+                if (parseInt(data.count_region_right) > 10) {
                     setJalurKanan('Macet');
                 }
 
                 // setJalurKanan(length(data['counts_right']))
                 data.counts_left.forEach(element => {
                     switch (element) {
+                        case 1: setJumlahMotor(jumlahMotor => jumlahMotor + 1); break;
                         case 2: setJumlahMobil(jumlahMobil => jumlahMobil + 1); break;
                         case 3: setJumlahMotor(jumlahMotor => jumlahMotor + 1); break;
                         case 5: setJumlahBus(jumlahBus => jumlahBus + 1); break;
@@ -81,6 +81,7 @@ const DashboardCCTV = () => {
                 });
                 data.counts_right.forEach(element => {
                     switch (element) {
+                        case 1: setJumlahMotor(jumlahMotor => jumlahMotor + 1); break;
                         case 2: setJumlahMobil(jumlahMobil => jumlahMobil + 1); break;
                         case 3: setJumlahMotor(jumlahMotor => jumlahMotor + 1); break;
                         case 5: setJumlahBus(jumlahBus => jumlahBus + 1); break;
@@ -88,14 +89,16 @@ const DashboardCCTV = () => {
                         default: break;
                     }
                 });
+                setLoading(false)
             })
             .catch(err => console.log(err));
-    }, [setData, setJalurKanan, setJalurKiri, setJumlahBus, setJumlahMobil, setJumlahMotor, setJumlahTruk, titik_cctv]);
+    }, [setData, setLoading, setJalurKanan, setJalurKiri, setJumlahBus, setJumlahMobil, setJumlahMotor, setJumlahTruk, titik_cctv]);
 
-    const handleChange = useCallback((e) => {
-        getdata()
+    const handleChange = useCallback(async (e) => {
+        setLoading(true)
+        await getdata()
         setTitikCCTV(e.target.value)
-    }, [getdata, setTitikCCTV]);
+    }, [getdata, setTitikCCTV, setLoading]);
 
 
     useEffect(() => {
@@ -195,15 +198,37 @@ const DashboardCCTV = () => {
                     </FormControl>
                 </Grid>
                 <Grid container justifyContent={'center'} justifySelf={'center'}>
-                    <Card sx={{
-                        marginTop: 2,
-                        marginX: 1,
-                        width: '100%',
-                        justifyItems: 'center',
-                        justifyContent: 'center'
-                    }}>
-                        {datacctv ? <img height={400} width={800} alt='cctv' src={'data:image/jpeg;base64,' + datacctv.image} /> : ''}
-                    </Card>
+                    {
+                        loading
+                        ?
+                        <Card
+                        sx={{
+                            marginTop: 2,
+                            marginX: 1,
+                            width: 800,
+                            height: 400,
+                            justifyItems: 'center',
+                            justifyContent: 'center',
+                            alignContent: 'center',
+                            alignItems: 'center'
+                        }}
+                        >
+                            <CircularProgress />
+                        </Card>
+                        :
+                        <Card sx={{
+                            marginTop: 2,
+                            marginX: 1,
+                            width: '100%',
+                            justifyItems: 'center',
+                            justifyContent: 'center',
+                            alignContent: 'center',
+                            alignItems: 'center'
+                        }}>
+                            {datacctv ? <img height={400} width={800} alt='cctv' src={'data:image/jpeg;base64,' + datacctv.image} /> : ''}
+                        </Card>
+                    }
+                    
                 </Grid>
                 <Grid container justifyContent={'center'}>
                     <Card sx={{
