@@ -144,18 +144,18 @@ async def process_frame(counter, full_uri):
         base64_image = base64.b64encode(encodedImage).decode('utf-8')
         photo_binary = base64.b64decode(base64_image)
 
-        if int(count_region_left) <= 4 :
+        if int(count_region_left) <= 8 :
             status_kiri = "lancar"
-        elif int(count_region_left) > 4 and int(count_region_left) <=10:
+        elif int(count_region_left) > 8 and int(count_region_left) <=12:
             status_kiri = "padat"
-        elif int(count_region_left) > 10:
+        elif int(count_region_left) > 12:
             status_kiri = "macet"
         
-        if int(count_region_right) <= 4 :
+        if int(count_region_right) <= 8 :
             status_kanan = "lancar"
-        elif int(count_region_right) > 4 and int(count_region_right) <=10:
+        elif int(count_region_right) > 8 and int(count_region_right) <=12:
             status_kanan = "padat"
-        elif int(count_region_right) > 10:
+        elif int(count_region_right) > 12:
             status_kanan = "macet"
 
         # if(int(count_region_left) > 0 or int(count_region_right) > 0):

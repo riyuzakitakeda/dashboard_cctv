@@ -48,23 +48,23 @@ const DashboardCCTV = () => {
             .then((data) => {
                 setData(data);
 
-                if (parseInt(data.count_region_left) <= 4) {
+                if (parseInt(data.count_region_left) <= 8) {
                     setJalurKiri('Lancar');
                 }
-                if (parseInt(data.count_region_left) > 4 && parseInt(data.count_region_left) <= 10) {
+                if (parseInt(data.count_region_left) > 8 && parseInt(data.count_region_left) <= 12) {
                     setJalurKiri('Padat');
                 }
-                if (parseInt(data.count_region_left) > 10) {
+                if (parseInt(data.count_region_left) > 12) {
                     setJalurKiri('Macet');
                 }
 
-                if (parseInt(data.count_region_right) <= 4) {
+                if (parseInt(data.count_region_right) <= 8) {
                     setJalurKanan('Lancar');
                 }
-                if (parseInt(data.count_region_right) > 4 && parseInt(data.count_region_right) <= 10) {
+                if (parseInt(data.count_region_right) > 8 && parseInt(data.count_region_right) <= 12) {
                     setJalurKanan('Padat');
                 }
-                if (parseInt(data.count_region_right) > 10) {
+                if (parseInt(data.count_region_right) > 12) {
                     setJalurKanan('Macet');
                 }
 
