@@ -1,0 +1,34 @@
+{
+    "pettarani": {
+        "username": "admin",
+        "password": "makassar12",
+        "ip": "10.50.12.200",
+        "line_points_left": [(150, 175), (300, 175), (700, 500), (150, 500)],
+        "line_points_right": [(300, 150), (500, 140), (700, 200), (600, 300)],
+        "classes_to_count": [2, 3, 5, 7], 
+    },
+    "barombong": {
+        "username": "admin",
+        "password": "makassar12",
+        "ip": "10.53.39.200",
+        "line_points_left": [(770, 350), (870, 365), (570, 700), (200, 700)],
+        "line_points_right": [(875, 365), (970, 365), (970, 700), (575, 700)],
+        "classes_to_count": [2, 3, 5, 7],
+    },
+    "alauddin": {
+        "username": "admin",
+        "password": "makassar12",
+        "ip": "10.50.77.200",
+        "line_points_left": [(550, 220), (620, 250), (230, 550), (25, 300)],
+        "line_points_right": [(600, 270), (700, 300), (670, 550), (250, 550)],
+        "classes_to_count": [2, 3, 5, 7],
+    },
+    "mtos": {
+        "username": "admin",
+        "password": "makassar123",
+        "ip": "10.53.32.200",
+        "line_points_left": [(470, 230), (570, 270), (230, 550), (25, 300)],
+        "line_points_right": [(580, 270), (700, 300), (670, 550), (270, 550)],
+        "classes_to_count": [2, 3, 5, 7],
+    },
+}

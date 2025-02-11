@@ -39,7 +39,7 @@ const DashboardCCTV = () => {
     const [titik_cctv, setTitikCCTV] = useState('pettarani');
     const [loading, setLoading] = useState(true);
 
-    
+
     const getdata = useCallback(async () => {
         await fetch(process.env.REACT_APP_API_URL + "image-data/" + titik_cctv, {
             method: 'get',
@@ -178,10 +178,10 @@ const DashboardCCTV = () => {
             <Grid container size={6} direction={'column'} spacing={2}>
                 <Grid>
                     <FormControl fullWidth
-                    sx={{
-                        marginTop: 2,
-                        marginX: 1
-                    }}>
+                        sx={{
+                            marginTop: 2,
+                            marginX: 1
+                        }}>
                         <InputLabel id="demo-simple-select-label">Titik CCTV</InputLabel>
                         <Select
                             labelId="demo-simple-select-label"
@@ -190,45 +190,69 @@ const DashboardCCTV = () => {
                             label="Age"
                             onChange={handleChange}
                         >
-                            <MenuItem value={'pettarani'}>Pettarani</MenuItem>
-                            <MenuItem value={'barombong'}>Barombong</MenuItem>
-                            <MenuItem value={'alauddin'}>Alauddin</MenuItem>
-                            <MenuItem value={'mtos'}>Veteran Sungai Saddang</MenuItem>
+                            <MenuItem value={'simpang_5_bandara'}>Simpang 5 Bandara</MenuItem>
+                            <MenuItem value={'taman_macan'}>Taman Macan</MenuItem>
+                            <MenuItem value={'pasar_butung'}>Pasar Butung</MenuItem>
+                            <MenuItem value={'abdesir_batua_raya'}>Abdesir Batua Raya</MenuItem>
+                            <MenuItem value={'waduk_borong'}>Waduk Borong</MenuItem>
+                            <MenuItem value={'flyover_atas'}>Flyover Atas</MenuItem>
+                            <MenuItem value={'haji_bau_monginsidi'}>Haji Bau Monginsidi</MenuItem>
+                            <MenuItem value={'pettarani_andi_djemma'}>Pettarani Andi Djemma</MenuItem>
+                            <MenuItem value={'perintis_unhas_pintu_2'}>Perintis UNHAS Pintu 2</MenuItem>
+                            <MenuItem value={'andi_tonro_kumala'}>Andi Tonro Kumala</MenuItem>
+                            <MenuItem value={'batas_makassar_gowa'}>Batas Makassar Gowa</MenuItem>
+                            <MenuItem value={'gunung_nona_1'}>Gunung Nona 1</MenuItem>
+                            <MenuItem value={'nipa_nipa_1'}>Nipa-Nipa 1</MenuItem>
+                            <MenuItem value={'mtos_1_barat'}>MTOS 1 Barat</MenuItem>
+                            <MenuItem value={'gunung_nona_2'}>Gunung Nona 2</MenuItem>
+                            <MenuItem value={'nipa_nipa_2'}>Nipa-Nipa 2</MenuItem>
+                            <MenuItem value={'masjid_chengho_1'}>Masjid Chengho 1</MenuItem>
+                            <MenuItem value={'masjid_chengho_2'}>Masjid Chengho 2</MenuItem>
+                            <MenuItem value={'perintis_unhas_pintu_1'}>Perintis UNHAS Pintu 1</MenuItem>
+                            <MenuItem value={'antang_raya_baruga'}>Antang Raya Baruga</MenuItem>
+                            <MenuItem value={'batua_raya_depan_yamaha'}>Batua Raya Depan Yamaha</MenuItem>
+                            <MenuItem value={'pongtiku_urip_sumoharjo'}>Pongtiku Urip Sumoharjo</MenuItem>
+                            <MenuItem value={'jembatan_barombong'}>Jembatan Barombong</MenuItem>
+                            <MenuItem value={'losari_02_c'}>Losari 02 C</MenuItem>
+                            <MenuItem value={'ahmad_yani'}>Ahmad Yani</MenuItem>
+                            <MenuItem value={'losari_pintu_masuk_utama'}>Losari Pintu Masuk Utama</MenuItem>
+                            <MenuItem value={'depan_sentra_wijaya'}>Depan Sentra Wijaya</MenuItem>
+                            <MenuItem value={'pizza_kfc_mtos'}>Pizza KFC MTOS</MenuItem>
                         </Select>
                     </FormControl>
                 </Grid>
                 <Grid container justifyContent={'center'} justifySelf={'center'}>
                     {
                         loading
-                        ?
-                        <Card
-                        sx={{
-                            marginTop: 2,
-                            marginX: 1,
-                            width: 800,
-                            height: 400,
-                            justifyItems: 'center',
-                            justifyContent: 'center',
-                            alignContent: 'center',
-                            alignItems: 'center'
-                        }}
-                        >
-                            <CircularProgress />
-                        </Card>
-                        :
-                        <Card sx={{
-                            marginTop: 2,
-                            marginX: 1,
-                            width: '100%',
-                            justifyItems: 'center',
-                            justifyContent: 'center',
-                            alignContent: 'center',
-                            alignItems: 'center'
-                        }}>
-                            {datacctv ? <img height={400} width={800} alt='cctv' src={'data:image/jpeg;base64,' + datacctv.image} /> : ''}
-                        </Card>
+                            ?
+                            <Card
+                                sx={{
+                                    marginTop: 2,
+                                    marginX: 1,
+                                    width: 800,
+                                    height: 400,
+                                    justifyItems: 'center',
+                                    justifyContent: 'center',
+                                    alignContent: 'center',
+                                    alignItems: 'center'
+                                }}
+                            >
+                                <CircularProgress />
+                            </Card>
+                            :
+                            <Card sx={{
+                                marginTop: 2,
+                                marginX: 1,
+                                width: '100%',
+                                justifyItems: 'center',
+                                justifyContent: 'center',
+                                alignContent: 'center',
+                                alignItems: 'center'
+                            }}>
+                                {datacctv ? <img height={400} width={800} alt='cctv' src={'data:image/jpeg;base64,' + datacctv.image} /> : ''}
+                            </Card>
                     }
-                    
+
                 </Grid>
                 <Grid container justifyContent={'center'}>
                     <Card sx={{
