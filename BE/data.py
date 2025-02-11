@@ -15,6 +15,14 @@ CORS(app)
 # Global configuration for cameras
 # Global configuration for cameras
 CAMERA_CONFIGS = {
+    "pettarani": {
+        "username": "admin",
+        "password": "makassar12",
+        "ip": "10.50.12.200",
+        "line_points_left": [(150, 175), (300, 175), (700, 500), (150, 500)],
+        "line_points_right": [(300, 150), (500, 140), (700, 200), (600, 300)],
+        "classes_to_count": [1,2,3,4],
+    },
     "simpang_5_bandara": {
         "username": "admin",
         "password": "makassar12",
