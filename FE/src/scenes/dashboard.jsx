@@ -71,19 +71,19 @@ const DashboardCCTV = () => {
                 // setJalurKanan(length(data['counts_right']))
                 data.counts_left.forEach(element => {
                     switch (element) {
-                        case 2: setJumlahMotor(jumlahMotor => jumlahMotor + 1); break;
+                        case 0: setJumlahMotor(jumlahMotor => jumlahMotor + 1); break;
                         case 1: setJumlahMobil(jumlahMobil => jumlahMobil + 1); break;
-                        case 3: setJumlahBus(jumlahBus => jumlahBus + 1); break;
-                        case 4: setJumlahTruk(jumlahTruk => jumlahTruk + 1); break;
+                        case 2: setJumlahBus(jumlahBus => jumlahBus + 1); break;
+                        case 3: setJumlahTruk(jumlahTruk => jumlahTruk + 1); break;
                         default: break;
                     }
                 });
                 data.counts_right.forEach(element => {
                     switch (element) {
-                        case 2: setJumlahMotor(jumlahMotor => jumlahMotor + 1); break;
+                        case 0: setJumlahMotor(jumlahMotor => jumlahMotor + 1); break;
                         case 1: setJumlahMobil(jumlahMobil => jumlahMobil + 1); break;
-                        case 3: setJumlahBus(jumlahBus => jumlahBus + 1); break;
-                        case 4: setJumlahTruk(jumlahTruk => jumlahTruk + 1); break;
+                        case 2: setJumlahBus(jumlahBus => jumlahBus + 1); break;
+                        case 3: setJumlahTruk(jumlahTruk => jumlahTruk + 1); break;
                         default: break;
                     }
                 });
